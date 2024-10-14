@@ -1,8 +1,8 @@
 FROM maven:3.6.3-jdk-11 AS build
 
-RUN mkdir -p /tmp/bookteria
+RUN mkdir -p /tmp/bookteria/
 
-COPY identity-service /tmp/bookteria/identity-service
+COPY identity-service /tmp/bookteria/
 
 WORKDIR /tmp/bookteria/identity-service
 
