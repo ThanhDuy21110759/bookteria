@@ -19,4 +19,4 @@ COPY --from=build /tmp/bookteria/profile-service/target/profile-service-0.0.1-SN
 
 EXPOSE 8081
 
-CMD ["java", "-jar", "target/profile-service-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "profile-service-0.0.1-SNAPSHOT.jar"]
