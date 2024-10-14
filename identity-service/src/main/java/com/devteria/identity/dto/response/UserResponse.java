@@ -19,6 +19,6 @@ public class UserResponse {
     LocalDate dob;
     Set<RoleResponse> roles;
 
-    //new field
+    // new field
     String city;
 }
