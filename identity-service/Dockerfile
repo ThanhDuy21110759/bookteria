@@ -1,12 +1,12 @@
 FROM maven:3.6.3-jdk-11 AS build
 
-RUN mkdir -p /tmp/bookteria/
-
-RUN pwd
-
-COPY identity-service /tmp/bookteria/
+RUN mkdir -p /tmp/bookteria/identity-service
 
 WORKDIR /tmp/bookteria/identity-service
+
+COPY ../src src/
+
+COPY ../pom.xml .
 
 RUN mvn clean install -DskipTests
 
