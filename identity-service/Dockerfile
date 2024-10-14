@@ -8,7 +8,7 @@ COPY src/ ./src/
 
 COPY pom.xml .
 
-RUN mvn clean package -DskipTests
+RUN mvn clean install -DskipTests
 
 EXPOSE 8080
 
