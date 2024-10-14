@@ -12,7 +12,7 @@ COPY pom.xml .
 RUN mvn clean install -DskipTests
 
 # Use JDK 22 runtime for the application
-FROM openjdk:22-jdk-slim
+FROM eclipse-temurin:22-jre
 
 WORKDIR /app
 COPY --from=build /tmp/bookteria/identity-service/target/identity-service-0.0.1-SNAPSHOT.jar /app/identity-service.jar
