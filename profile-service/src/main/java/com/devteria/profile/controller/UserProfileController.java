@@ -30,6 +30,7 @@ public class UserProfileController {
 
     @GetMapping("")
     List<UserProfileReponse> getAllProfiles() {
+        System.out.println("Received request for profile");
         return userProfileService.getAllProfiles();
     }
 }
