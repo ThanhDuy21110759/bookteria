@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: bookteria_identity
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  neo4j:
+    image: neo4j:5.11
+    container_name: neo4j
+    environment:
+      NEO4J_AUTH: neo4j/NAMFGVS-l1cM52UDr8WblLppxWiIn9aeY9VwYNr3AQc
+    ports:
+      - "7687:7687" # Bolt
+      - "7474:7474" # Web UI
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - app-network
+
+  identity-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.identity
+    container_name: identity-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/bookteria_identity
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      JWT_SIGNERKEY: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
+      APP_PROFILE_SERVICE_URL: http://profile-service:8081/profile/users
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  profile-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.profile
+    container_name: profile-service
+    environment:
+      SPRING_NEO4J_URI: neo4j://neo4j:7687
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: NAMFGVS-l1cM52UDr8WblLppxWiIn9aeY9VwYNr3AQc
+    ports:
+      - "8081:8081"
+    depends_on:
+      - neo4j
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  neo4j_data:
