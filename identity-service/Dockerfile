@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
+RUN cd /usr/src/app/identity-service
+
 RUN mvn clean install -DskipTests
 
 EXPOSE 8080
