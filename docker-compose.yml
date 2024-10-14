@@ -39,7 +39,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
       JWT_SIGNERKEY: "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
-      APP_PROFILE_SERVICE_URL: http://profile-service:8081/profile/users
+      APP_PROFILE_SERVICE_URL: http://34.67.42.38:8081/profile/users
     ports:
       - "8080:8080"
     depends_on:
