@@ -1,10 +1,12 @@
 FROM maven:3.6.3-jdk-11 AS build
 
-WORKDIR /usr/src/app
+RUN mkdir -p /tmp/bookteria
 
-COPY . /usr/src/app
+WORKDIR /tmp/bookteria
 
-RUN cd /usr/src/app/identity-service
+COPY . .
+
+RUN cd identity-service
 
 RUN mvn clean install -DskipTests
 
