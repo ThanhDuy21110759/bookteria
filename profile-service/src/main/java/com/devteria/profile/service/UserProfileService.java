@@ -1,19 +1,19 @@
 package com.devteria.profile.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.devteria.profile.Mapper.UserProfileMapper;
 import com.devteria.profile.dto.request.ProfileCreationRequest;
 import com.devteria.profile.dto.response.UserProfileReponse;
 import com.devteria.profile.entity.UserProfile;
-import com.devteria.profile.Mapper.UserProfileMapper;
 import com.devteria.profile.repository.UserProfileRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +25,9 @@ public class UserProfileService {
 
     public List<UserProfileReponse> getAllProfiles() {
         List<UserProfile> userProfiles = userProfileRepository.findAll();
-        return userProfiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
+        return userProfiles.stream()
+                .map(userProfileMapper::toUserProfileReponse)
+                .toList();
     }
 
     public UserProfileReponse createProfile(ProfileCreationRequest request) {

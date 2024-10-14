@@ -9,5 +9,6 @@ import com.devteria.profile.entity.UserProfile;
 @Mapper(componentModel = "spring")
 public interface UserProfileMapper {
     UserProfile toUserProfile(ProfileCreationRequest request);
+
     UserProfileReponse toUserProfileReponse(UserProfile entity);
 }
