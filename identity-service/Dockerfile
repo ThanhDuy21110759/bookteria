@@ -4,9 +4,9 @@ RUN mkdir -p /tmp/bookteria/identity-service
 
 WORKDIR /tmp/bookteria/identity-service
 
-COPY ../src src/
+COPY src/ ./src/
 
-COPY ../pom.xml .
+COPY pom.xml .
 
 RUN mvn clean package -DskipTests
 
